@@ -15,7 +15,7 @@ interface IHistorical{
   low:number;
   close:number;
   volume:number;
-  market_cap :number;
+  market_cap :number; 
 }
 function Chart({coinId} : ChartProps){
   const isDark = useRecoilValue(isDarkAtom);

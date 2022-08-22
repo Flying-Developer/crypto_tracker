@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { Helmet}from "react-helmet";
 import {useQuery} from "@tanstack/react-query";
 import {fetchCoins} from "../api";
+import { useSetRecoilState } from "recoil";
+import { isDarkAtom } from '../atoms';
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -63,6 +65,8 @@ const Img = styled.img`
 `;
 
 function Coins() {
+  const setDarkAtom  = useSetRecoilState(isDarkAtom);
+  const toggleDarkAtom = () => setDarkAtom((current)=> !current);
   const { isLoading, data } = useQuery<CoinInterface[]>(["allCoins"], fetchCoins);
   return (
     <Container>
@@ -73,6 +77,7 @@ function Coins() {
       </Helmet>
       <Header>
         <Title>코인</Title>
+        <button onClick={toggleDarkAtom}>toggle Btn</button>
       </Header>
       {isLoading? (
         <Loader>Loading... </Loader>
